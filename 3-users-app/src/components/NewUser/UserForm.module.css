@@ -20,6 +20,11 @@
 	margin-bottom: 0.5rem;
 }
 
+.new-user__control input:focus {
+	outline: none;
+	border-color: #4f005f;
+}
+
 .new-user__actions {
 	text-align: left;
 }

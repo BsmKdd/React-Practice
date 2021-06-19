@@ -1,21 +1,26 @@
 import React from 'react';
 
-import './Modal.css';
+import classes from './Modal.module.css';
+import Button from './Button';
+import Card from './Card';
 
 const Modal = (props) => {
-	const classes = 'modal ' + props.className;
 	return (
-		<div className={classes}>
-			<div className="modal-content">
-				<header>{props.details.header}</header>
-				<div className="modal-message">{props.details.message}</div>
-				<footer>
-					{' '}
-					<button type="button" onClick={props.onCancel}>
+		<div>
+			<div className={classes.backdrop} onClick={props.onCancel} />
+			<Card className={classes.modal}>
+				<header className={classes.header}>
+					<h2>{props.details.header}</h2>
+				</header>
+				<div className={classes.content}>
+					<p>{props.details.message}</p>
+				</div>
+				<footer className={classes.actions}>
+					<Button type="button" onClick={props.onCancel}>
 						Okay
-					</button>
+					</Button>
 				</footer>
-			</div>
+			</Card>
 		</div>
 	);
 };

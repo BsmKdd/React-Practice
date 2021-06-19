@@ -3,7 +3,7 @@ import './UsersList.css';
 
 const UsersList = (props) => {
 	if (props.items.length === 0) {
-		return <h2 className="expenses-list__fallback">Found no users.</h2>;
+		return <h3 className="expenses-list__fallback">Found no users.</h3>;
 	}
 
 	return (

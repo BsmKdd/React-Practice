@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 
-import './NewUser.css';
+import classes from './NewUser.module.css';
 
 import UserForm from './UserForm';
 import Modal from '../UI/Modal';
+import Card from '../UI/Card';
 
 const NewUser = (props) => {
-	// const [isEditing, setIsEditing] = useState(false);
 	const [invalid, setInvalid] = useState(false);
-	const [errorDetails, setErrorDetails] = useState();
+	const [errorDetails, setErrorDetails] = useState({});
 
 	const saveUserDataHandler = (enteredUserData) => {
 		const userData = {
 			...enteredUserData,
 		};
 		props.onAddUser(userData);
-		// setIsEditing(false);
 	};
 
 	const invalidInputHandler = (errorDetails) => {
@@ -24,27 +23,18 @@ const NewUser = (props) => {
 	};
 
 	const hideModal = () => {
-		setInvalid(false);
+		setInvalid(null);
 	};
-	// const startEditingHandler = () => {
-	// 	setIsEditing(true);
-	// };
-
-	// const stopEditingHandler = () => {
-	// 	setIsEditing(false);
-	// };
 
 	return (
-		<div className="new-user">
-			<Modal
-				details={errorDetails}
-				className={invalid ? 'visible' : 'invisible'}
-				onCancel={hideModal}
-			></Modal>
-			<UserForm
-				onInvalidInput={invalidInputHandler}
-				onSaveUserData={saveUserDataHandler}
-			></UserForm>
+		<div>
+			{invalid && <Modal details={errorDetails} onCancel={hideModal}></Modal>}
+			<Card className={`${classes['new-user']}`}>
+				<UserForm
+					onInvalidInput={invalidInputHandler}
+					onSaveUserData={saveUserDataHandler}
+				></UserForm>
+			</Card>
 		</div>
 	);
 };
