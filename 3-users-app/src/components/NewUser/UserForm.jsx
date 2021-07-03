@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 
 import classes from './UserForm.module.css';
 import Button from '../UI/Button';
 
 const UserForm = (props) => {
-	const [enteredUserName, setEnteredUsername] = useState('');
-	const [enteredAge, setEnteredAge] = useState('');
-
-	const usernameChangeHandle = (event) => {
-		setEnteredUsername(event.target.value);
-	};
-	const ageChangeHandler = (event) => {
-		setEnteredAge(event.target.value);
-	};
+	const nameInputRef = useRef();
+	const ageInputRef = useRef();
 
 	const submitHandler = (event) => {
 		event.preventDefault();
+
+		const enteredUserName = nameInputRef.current.value;
+		const enteredAge = ageInputRef.current.value;
 
 		if (enteredUserName.trim().length === 0 || enteredAge.trim().length === 0) {
 			props.onInvalidInput({
@@ -38,8 +34,8 @@ const UserForm = (props) => {
 		};
 
 		props.onSaveUserData(userData);
-		setEnteredUsername('');
-		setEnteredAge('');
+		nameInputRef.current.value = '';
+		ageInputRef.current.value = '';
 	};
 
 	return (
@@ -47,15 +43,11 @@ const UserForm = (props) => {
 			<div className={classes['new-user__controls']}>
 				<div className={classes['new-user__control']}>
 					<label>Username</label>
-					<input
-						type="text"
-						value={enteredUserName}
-						onChange={usernameChangeHandle}
-					/>
+					<input type="text" ref={nameInputRef} />
 				</div>
 				<div className={classes['new-user__control']}>
 					<label>Age (Years)</label>
-					<input type="number" value={enteredAge} onChange={ageChangeHandler} />
+					<input type="number" ref={ageInputRef} />
 				</div>
 			</div>
 			<div className={classes['new-user__actions']}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 
 import classes from './NewUser.module.css';
 
@@ -27,7 +27,7 @@ const NewUser = (props) => {
 	};
 
 	return (
-		<div>
+		<Fragment>
 			{invalid && <Modal details={errorDetails} onCancel={hideModal}></Modal>}
 			<Card className={`${classes['new-user']}`}>
 				<UserForm
@@ -35,7 +35,7 @@ const NewUser = (props) => {
 					onSaveUserData={saveUserDataHandler}
 				></UserForm>
 			</Card>
-		</div>
+		</Fragment>
 	);
 };
 
