@@ -8,11 +8,24 @@ import classes from './Cart.module.css';
 const Cart = (props) => {
 	const cartCtx = useContext(CartConext);
 
+	const incrementItemHandler = (item) => {
+		cartCtx.addItem({ ...item, amount: 1 });
+	};
+
+	const removeItemHandler = (id) => {
+		cartCtx.removeItem(id);
+	};
+
 	return (
 		<Modal onClose={props.onClose}>
 			<ul className={classes['cart-items']}>
 				{cartCtx.items.map((item) => (
-					<CartItem {...item} />
+					<CartItem
+						key={item.id}
+						{...item}
+						incrementItem={incrementItemHandler.bind(null, item)}
+						removeItem={removeItemHandler.bind(null, item.id)}
+					/>
 				))}
 			</ul>
 			<div className={classes['total']}>
