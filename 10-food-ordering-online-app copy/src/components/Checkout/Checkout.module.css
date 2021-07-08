@@ -1,0 +1,9 @@
+.error-text {
+    color: #ff0033;
+    text-align: center;
+}
+
+.loading-indicator {
+    display: block;
+    margin: auto;
+}

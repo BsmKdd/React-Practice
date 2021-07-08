@@ -2,13 +2,12 @@
     margin-bottom: 1rem;
 }
 
-.form-control input, .form-control label {
-    display: block;
-    width: 100%;
+.form-control label {
+    width: 4rem
 }
 
-.form-control label {
-    width: 15%
+.form-control input, .form-control label {
+    display: block;
 }
 
 .form-control label {

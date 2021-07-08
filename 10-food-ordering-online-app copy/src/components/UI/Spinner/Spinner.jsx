@@ -1,8 +1,11 @@
 import classes from './Spinner.module.css';
 
-const Spinner = () => {
+const Spinner = (props) => {
 	return (
-		<svg className={classes['spinner']} viewBox="0 0 50 50">
+		<svg
+			className={`${classes['spinner']} ${props.className}`}
+			viewBox="0 0 50 50"
+		>
 			<circle
 				className={classes['path']}
 				cx="25"

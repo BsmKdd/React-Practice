@@ -15,7 +15,6 @@ const CheckoutForm = (props) => {
 		hasError: nameHasError,
 		valueChangeHandler: nameChangeHandler,
 		inputBlurHandler: nameBlurHandler,
-		reset: resetName,
 	} = useInput(isNotEmpty);
 
 	const {
@@ -24,7 +23,6 @@ const CheckoutForm = (props) => {
 		hasError: addressHasError,
 		valueChangeHandler: addressChangeHandler,
 		inputBlurHandler: addressBlurHandler,
-		reset: resetAddress,
 	} = useInput(isNotEmpty);
 
 	let formIsValid = false;
@@ -33,16 +31,17 @@ const CheckoutForm = (props) => {
 		formIsValid = true;
 	}
 
-	const formSubmitHandler = (event) => {
+	const formSubmitHandler = async (event) => {
 		event.preventDefault();
 
 		if (!formIsValid) {
 			return;
 		}
 
-		resetName();
-		resetAddress();
-		props.onConfirm({ name: nameValue, address: addressValue });
+		props.onConfirm({
+			name: nameValue,
+			address: addressValue,
+		});
 	};
 
 	const nameClasses = nameHasError
@@ -84,7 +83,7 @@ const CheckoutForm = (props) => {
 			</div>
 			<div className={classes['actions']}>
 				<button
-					type="submit"
+					type="button"
 					className={classes['button--alt']}
 					onClick={props.onClose}
 				>
@@ -93,7 +92,7 @@ const CheckoutForm = (props) => {
 				<button
 					type="submit"
 					className={classes['button']}
-					disabled={!formIsValid}
+					disabled={!formIsValid || props.isLoading}
 				>
 					Confirm
 				</button>
